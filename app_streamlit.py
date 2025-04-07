@@ -11,7 +11,7 @@ query = st.text_input("Enter your job description or query:")
 if st.button("Get Recommendations"):
     if query:
         
-        response = requests.post("http://127.0.0.1:5000/recommend", json={"query": query})
+        response = requests.post("https://shlars.streamlit.app/", json={"query": query})
         
         
         print("Raw response:", response.text)
