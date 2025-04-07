@@ -10,13 +10,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import spacy
+from spacy.cli import download
 
 
 warnings.filterwarnings("ignore")
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  
 
 
-nlp = spacy.load("en_core_web_sm")
+# Attempt to load the SpaCy model
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    # If the model is not found, download it
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 def extract_keywords(query):
     
